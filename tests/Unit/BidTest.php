@@ -26,6 +26,23 @@ class BidTest extends TestCase
 
         $winningPrice = (new Controller())->getWinningPrice($arr);
 
+        $this->assertTrue($winningPrice >= $reservePrice);
+    }
+
+    public function test_wining_price_lower_than_reserve_price()
+    {
+        $reservePrice = 100.00;
+
+        $arr = [
+            'a' => ['bid' => [90.00]],
+            'b' => ['bid' => [120.00]],
+            'c' => ['bid' => [80.00]],
+            'd' => ['bid' => [50.00]],
+            'e' => ['bid' => [30.00]]
+        ];
+
+        $winningPrice = (new Controller())->getWinningPrice($arr);
+
         $this->assertTrue($winningPrice >= $reservePrice, 'Winning price lower than reserve price!');
     }
 }
